@@ -46,14 +46,12 @@ public class DbContext : IdentityDbContext<User>
             .HasForeignKey(pl => pl.PostId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Configure relationship between BlogPost and Comment
         builder.Entity<BlogPost>()
             .HasMany(p => p.PostLikes)
             .WithOne(pl => pl.Post)
             .HasForeignKey(pl => pl.PostId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Configure relationship between BlogPost and Comment
         builder.Entity<BlogPost>()
             .HasMany(p => p.Comments)
             .WithOne(c => c.Post)
