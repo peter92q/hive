@@ -1,0 +1,44 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.psess
+*.cache
+*.pdb
+*.dbmdl
+*.log
+*.vspscc
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+
+# NuGet packages
+*.nupkg
+/packages/
+
+# Node.js dependencies
+node_modules/
+
+# Other tools and frameworks
+bower_components/
+[Tt]ools/
+artifacts/
+packages/
+*.sqlproj
+*.nuget.props
+*.nuget.targets
+
+# Resharper files
+_ReSharper*/
+*.resharper
+*.DotSettings
+
+# Windows folder and files that may cause issues
+Thumbs.db
+ehthumbs.db
+Desktop.ini

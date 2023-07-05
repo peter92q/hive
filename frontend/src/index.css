@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  body {
+    scrollbar-width: none;
+  }
+
+  /**/
+
+  /*styled inputs*/
+
+.form-container .MuiInputBase-input {
+  border: 2px solid #a47e06;
+  border-radius: 5px;
+  color: white;
+}
+
+.form-container .MuiInputBase-input:focus {
+  border:2px solid #a47e06;
+  z-index: 10;
+}
+
+.form-container .MuiInputBase-input:hover {
+  border:2px solid #a47e06;
+  z-index: 10;
+}
+
+.form-container .MuiInputLabel-root{
+  background: #111827;
+  color: #a47e06;
+  z-index: 100;
+ 
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+.form-container .MuiFormControl-root:hover > .MuiInputLabel-root {
+  color: #a47e06;
+  border: 1px solid #a47e06;
+}
+
+.form-container .MuiInputLabel-root.Mui-focused {
+  color: #a47e06;
+  
+}
+
+.form-container .Mui-error .MuiInputBase-input {
+  border:2px solid red;
+  z-index: 20;
+}
+
+/*end of styled inputs*/
+
+
+.responsive-text {
+  font-size: calc(7px + 0.4vw);
+}
+
+.responsive-text2 {
+  font-size: calc(6px + 0.5vw);
+}
+
+.responsive-text3 {
+  font-size: calc(16px + 0.6vw);
+}
+
+.responsive-text4 {
+  font-size: calc(24px + 0.7vw);
+}
+
+.responsive-text5 {
+  font-size: calc(17px + 0.4vw);
+}
+
+.background {
+  height: 200px;
+  background: linear-gradient(to bottom, black 50%, white 50%);
+  background-image: radial-gradient(circle at center, transparent 0%, transparent 50%, black 50%, black 100%);
+}
+
+/*chat bubble*/
+.bubble {
+  --r: 25px; /* the radius */
+  --t: 30px; /* the size of the tail */
+  
+  max-width: 300px;
+  padding: calc(2*var(--r)/3);
+  -webkit-mask: 
+    radial-gradient(var(--t) at var(--_d) 0,#0000 98%,#000 102%) 
+      var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat,
+    conic-gradient(at var(--r) var(--r),#000 75%,#0000 0) 
+      calc(var(--r)/-2) calc(var(--r)/-2) padding-box, 
+    radial-gradient(50% 50%,#000 98%,#0000 101%) 
+      0 0/var(--r) var(--r) space padding-box;
+  color: #fff;
+}
+
+.left {
+  --_d: 0%;
+  border-left: var(--t) solid #0000;
+  margin-right: var(--t);
+
+}
+
+.right {
+  --_d: 100%;
+  border-right: var(--t) solid #0000;
+  margin-left: var(--t);
+}
+
+/*shimmy*/
+
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(62, 61, 61, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+  animation: shimmerAnimation 2s infinite;
+}
+
+@keyframes shimmerAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.scrollable-container {
+  overscroll-behavior-y: contain;
+}
