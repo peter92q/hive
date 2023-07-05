@@ -125,8 +125,6 @@ namespace backend.Controllers
             });
         }
 
-
-        //working
         [HttpGet("{authorId}")]
         public async Task<ActionResult<List<BlogPostDto>>> GetBlogPostsByAuthor(string authorId)
         {
@@ -207,8 +205,6 @@ namespace backend.Controllers
             }).ToList();
         }
 
-
-        //working
         [HttpPost("{id}/like")]
         public async Task<ActionResult> LikePost(int id)
         {
@@ -227,10 +223,7 @@ namespace backend.Controllers
             {
                 return Unauthorized();
             }
-            //instead of adding a separate enpoint for removing a like i check if a user
-            //has already liked the post and if he sends a consecutive like request we
-            //remove the like instead, this adds the like/dislike effect on the frontend
-            //you click on the heart icon to like and click on it again to dislike
+            
             var existingLike = post.PostLikes.FirstOrDefault(pl => pl.UserId == user.Id);
 
             if (existingLike != null)
@@ -270,7 +263,6 @@ namespace backend.Controllers
             }
         }
 
-        //working
         [Authorize]
         [HttpDelete("{postId}")]
         public async Task<ActionResult> DeletePost(int postId)
@@ -371,7 +363,6 @@ namespace backend.Controllers
         [HttpDelete("{postId}/comments/{commentId}")]
         public async Task<ActionResult> DeleteComment(int postId, int commentId)
         {
-            // Find the post
             var post = await _context.BlogPosts.FindAsync(postId);
 
             if (post == null)
@@ -379,7 +370,6 @@ namespace backend.Controllers
                 return NotFound("Post not found");
             }
 
-            // Find the comment
             var comment = await _context.Comments.FindAsync(commentId);
 
             if (comment == null)
@@ -387,29 +377,22 @@ namespace backend.Controllers
                 return NotFound("Comment not found");
             }
 
-            // Check if the comment belongs to the post
             if (comment.PostId != postId)
             {
                 return BadRequest("The comment does not belong to the specified post");
             }
 
-            // Get the current user
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            // Check if the user is the author of the comment or has an admin role (optional)
-            if (user.Id != comment.UserId /* && !User.IsInRole("Admin") */)
+            if (user.Id != comment.UserId )
             {
                 return Forbid("You do not have permission to delete this comment");
             }
 
-            // Remove the comment from the post and update the CommentsCount
             post.Comments.Remove(comment);
             post.CommentsCount = post.Comments.Count;
-
-            // Delete the comment
             _context.Comments.Remove(comment);
 
-            // Save changes to the database
             await _context.SaveChangesAsync();
 
             return NoContent();
