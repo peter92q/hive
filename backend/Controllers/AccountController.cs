@@ -261,7 +261,6 @@ public class AccountController : ControllerBase
             return NotFound();
         }
 
-        // Update the user's profile picture URL and save changes to the database
         user.ProfilePictureUrl = s3ObjectUrl;
         await _userManager.UpdateAsync(user);
 
@@ -289,7 +288,6 @@ public class AccountController : ControllerBase
 
         int updatedFollowingCount = await _userService.GetFollowingCountAsync(follower.Id);
 
-        // Update the isFollowing property based on the updated IsFollowing property of the UserFollow entity
         isFollowing = await _userService.IsFollowingAsync(follower.Id, userId);
 
         if (isFollowing)
@@ -298,7 +296,6 @@ public class AccountController : ControllerBase
         }
         else
         {
-            // Remove the user follow entity from the user's Followers and Following collections
             var followingUser = await _userManager.FindByIdAsync(userId);
 
             var followerFollow = followingUser.Followers.FirstOrDefault(f => f.FollowerId == follower.Id);
@@ -320,7 +317,6 @@ public class AccountController : ControllerBase
         }
     }
 
-    //working
     [HttpGet("{userId}/following")]
     public async Task<ActionResult<IEnumerable<object>>> GetUserFollowing(string userId)
     {
@@ -362,8 +358,6 @@ public class AccountController : ControllerBase
         return Ok(followingDto);
     }
 
-
-    //working
     [HttpGet("{userId}/followers")]
     public async Task<ActionResult<IEnumerable<object>>> GetUserFollowers(string userId)
     {
